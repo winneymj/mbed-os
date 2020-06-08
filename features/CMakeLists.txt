@@ -3,15 +3,15 @@
 
 add_subdirectory(frameworks/mbed-trace)
 
-target_link_libraries(mbedTrace
-    PRIVATE
-        gen_config
-)
+# target_link_libraries(mbedTrace
+#     PRIVATE
+#         gen_config
+# )
 
-target_link_libraries(mbed-os
-    PUBLIC
-        mbedTrace
-)
+# target_link_libraries(mbed-os
+#     PUBLIC
+#         mbedTrace
+# )
 
 add_subdirectory(lwipstack)
 add_subdirectory(mbedtls)

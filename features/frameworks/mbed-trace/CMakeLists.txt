@@ -1,23 +1,32 @@
-INCLUDE(CMakeForceCompiler)
+# INCLUDE(CMakeForceCompiler)
 
-cmake_minimum_required (VERSION 2.8)
-SET(CMAKE_SYSTEM_NAME Generic)
+# cmake_minimum_required (VERSION 2.8)
+# SET(CMAKE_SYSTEM_NAME Generic)
 
-project(mbedTrace)
+# project(mbedTrace)
 
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/mbed-trace
-    ${CMAKE_CURRENT_SOURCE_DIR}/../nanostack-libservice/mbed-client-libservice
-    ${CMAKE_CURRENT_SOURCE_DIR}/../nanostack-libservice
+# include_directories(
+#     ${CMAKE_CURRENT_SOURCE_DIR}/mbed-trace
+#     ${CMAKE_CURRENT_SOURCE_DIR}/../nanostack-libservice/mbed-client-libservice
+#     ${CMAKE_CURRENT_SOURCE_DIR}/../nanostack-libservice
+# )
+
+# set (MBED_TRACE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/source/mbed_trace.c)
+# add_library(mbedTrace "${MBED_TRACE_SRC}" "")
+target_sources(mbed-os
+	PRIVATE
+		source/mbed_trace.c
 )
 
-set (MBED_TRACE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/source/mbed_trace.c)
-
-
-add_library(mbedTrace "${MBED_TRACE_SRC}" "")
-
-target_include_directories(mbedTrace
+# target_include_directories(mbedTrace
+#     PUBLIC
+#         ${CMAKE_CURRENT_SOURCE_DIR}
+#         ${CMAKE_CURRENT_SOURCE_DIR}/mbed-trace
+# )
+target_include_directories(mbed-os
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/mbed-trace
+        ${CMAKE_CURRENT_SOURCE_DIR}/../nanostack-libservice/mbed-client-libservice
+        ${CMAKE_CURRENT_SOURCE_DIR}/../nanostack-libservice
 )
