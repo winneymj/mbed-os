@@ -5675,9 +5675,6 @@
         "inherits": [
             "MCU_NRF52840"
         ],
-        "detect_code": [
-            "1102"
-        ],
         "macros_add": [
             "CONFIG_GPIO_AS_PINRESET"
         ],
