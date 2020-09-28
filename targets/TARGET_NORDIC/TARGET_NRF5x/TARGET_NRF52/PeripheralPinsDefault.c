@@ -29,7 +29,8 @@ MBED_WEAK const PinMapI2C PinMap_I2C[1] = {
  * Can be overwritten by user.
  */
 MBED_WEAK const PinMapSPI PinMap_SPI[1] = {
-    { NC, NC, NC, NC }
+    // { NC, NC, NC }
+    { SPI_PSELMOSI0, NC, SPI_PSELSCK0, 3 }
 };
 
 /* Default mapping between PWM pins and PWM instance.
