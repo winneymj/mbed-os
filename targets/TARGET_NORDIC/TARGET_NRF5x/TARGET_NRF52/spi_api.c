@@ -507,11 +507,6 @@ int spi_master_write(spi_t *obj, int value)
     // return rx_buff;
 
     nrfx_err_t ret;
-//  #if NRFX_CHECK(NRFX_SPIM_ENABLED)
-//    nrfx_spim_xfer_desc_t desc;
-//  #elif NRFX_CHECK(NRFX_SPI_ENABLED)
-//    nrfx_spi_xfer_desc_t desc;
-// #endif
 
 #if DEVICE_SPI_ASYNCH
     struct spi_s *spi_inst = &obj->spi;
@@ -533,20 +528,15 @@ int spi_master_write(spi_t *obj, int value)
         nrf_gpio_pin_clear(spi_inst->cs);
     }
 
- #if NRFX_CHECK(NRFX_SPIM_ENABLED)
-   nrfx_spim_xfer_desc_t desc = NRFX_SPIM_XFER_TRX(&tx_buff, 1, &rx_buff, 1);
- #elif NRFX_CHECK(NRFX_SPI_ENABLED)
-   nrfx_spi_xfer_desc_t desc = NRFX_SPI_XFER_TRX(&tx_buff, 1, &rx_buff, 1);
+#if NRFX_CHECK(NRFX_SPIM_ENABLED)
+    nrfx_spim_xfer_desc_t desc = NRFX_SPIM_XFER_TRX(&tx_buff, 1, &rx_buff, 1);
+#elif NRFX_CHECK(NRFX_SPI_ENABLED)
+    nrfx_spi_xfer_desc_t desc = NRFX_SPI_XFER_TRX(&tx_buff, 1, &rx_buff, 1);
 #endif
 
-//     /* Transfer 1 byte. */
-//     desc.p_tx_buffer = &tx_buff;
-//     desc.p_rx_buffer = &rx_buff;
-//     desc.tx_length = 1;
-//     desc.rx_length = 1;
- #if NRFX_CHECK(NRFX_SPIM_ENABLED)
+#if NRFX_CHECK(NRFX_SPIM_ENABLED)
     ret = nrfx_spim_xfer(&nordic_nrf5_spim_instance[instance], &desc, 0);
- #elif NRFX_CHECK(NRFX_SPI_ENABLED)
+#elif NRFX_CHECK(NRFX_SPI_ENABLED)
     ret = nrfx_spi_xfer(&nordic_nrf5_spi_instance[instance], &desc, 0);
 #endif
 
